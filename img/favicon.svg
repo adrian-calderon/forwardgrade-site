@@ -1,0 +1,8 @@
+<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <title>Forward Grade</title>
+  <g id="icon">
+    <path fill="#265448" fill-rule="evenodd" d="
+      M256 76 C 366 162 410 236 410 298 A 154 154 0 0 1 102 298 C 102 236 146 162 256 76 Z
+      M172 330 L256 254 L340 330 L340 396 L256 320 L172 396 Z"/>
+  </g>
+</svg>

@@ -38,18 +38,43 @@
   </div>
 </section>
 
+<section id="limits">
+  <div class="wrap">
+    <h2>What public data can't show.</h2>
+    <p class="lede">These tests go about as far as public data allows. The rest needs facility records.</p>
+    <dl class="limits">
+      <div>
+        <dt>Toxin levels</dt>
+        <dd>No national public record gives DON, aflatoxin or fumonisin levels by county. The test below uses insurance claims, which only see losses big enough to be paid, not the lower levels that drive price discounts.</dd>
+      </div>
+      <div>
+        <dt>Test weight and falling number</dt>
+        <dd>Only national or export-region averages are public, so neither was tested.</dd>
+      </div>
+      <div>
+        <dt>The facility</dt>
+        <dd>Results at the elevator and the truckload belong to the facilities. The planned data-licensing arrangements are how the forecasts get there.</dd>
+      </div>
+      <div>
+        <dt>The method</dt>
+        <dd>Rain days stand in for humidity and leaf wetness, flowering dates are known only by state, and the county list was chosen using the full insurance record. Claims also depend on who buys insurance and how losses are adjusted.</dd>
+      </div>
+    </dl>
+  </div>
+</section>
+
 <section id="quality-test" class="method quality">
   <div class="wrap">
     <h2>First quality test: mycotoxin losses in every US county.</h2>
-    <p class="lede">Crop insurance pays out when mycotoxin losses are large enough to claim, and USDA publishes claims by county and cause of loss. We asked whether weather around flowering could tell which counties would file one, better than each county's own history, predicting every year from earlier years only.</p>
-    <p class="lede">It ranks the risk better, in both crops. It does not yet call how bad a bad year will be.</p>
-
     <dl class="q-stats">
       <div><dt>Corn, years weather beat county history</dt><dd>16 of 21</dd></div>
       <div><dt>Wheat, years weather beat county history</dt><dd>16 of 21</dd></div>
       <div><dt>Corn, ranking accuracy (AUC): county history to weather</dt><dd>0.69 <span role="img" aria-label="to">&rarr;</span> 0.77</dd></div>
       <div><dt>Wheat, ranking accuracy (AUC): county history to weather</dt><dd>0.65 <span role="img" aria-label="to">&rarr;</span> 0.78</dd></div>
     </dl>
+    <p class="lede">Crop insurance pays out when mycotoxin losses are large enough to claim, and USDA publishes claims by county and cause of loss. We asked whether weather around flowering could tell which counties would file one, better than each county's own history, predicting every year from earlier years only.</p>
+    <p class="lede">It ranks the risk better, in both crops. It does not yet call how bad a bad year will be.</p>
+
 
     <figure class="q-map">
       <img src="img/us-tested.svg" width="960" height="607" loading="lazy" alt="Map of the lower 48 states. 2,075 counties with a long insured record for corn or wheat are shaded, darker where more seasons were tested; they cover the Corn Belt, the Plains, the Mid-South and the East.">
@@ -252,28 +277,16 @@
   </div>
 </section>
 
-<section id="limits">
+<section id="sources">
   <div class="wrap">
-    <h2>What public data can't show.</h2>
-    <p class="lede">These tests go about as far as public data allows. The rest needs facility records.</p>
-    <dl class="limits">
-      <div>
-        <dt>Toxin levels</dt>
-        <dd>No national public record gives DON, aflatoxin or fumonisin levels by county. The test above uses insurance claims, which only see losses big enough to be paid, not the lower levels that drive price discounts.</dd>
-      </div>
-      <div>
-        <dt>Test weight and falling number</dt>
-        <dd>Only national or export-region averages are public, so neither was tested.</dd>
-      </div>
-      <div>
-        <dt>The facility</dt>
-        <dd>Results at the elevator and the truckload belong to the facilities. The planned data-licensing arrangements are how the forecasts get there.</dd>
-      </div>
-      <div>
-        <dt>The method</dt>
-        <dd>Rain days stand in for humidity and leaf wetness, flowering dates are known only by state, and the county list was chosen using the full insurance record. Claims also depend on who buys insurance and how losses are adjusted.</dd>
-      </div>
+    <h2>Sources and disclaimer.</h2>
+    <dl class="sources">
+      <div><dt>Mycotoxin claims</dt><dd>USDA Risk Management Agency, cause of loss data by county (cause code 82, mycotoxin)</dd></div>
+      <div><dt>Weather</dt><dd>NOAA NCEI nClimGrid daily county data</dd></div>
+      <div><dt>Flowering dates and crop yield</dt><dd>USDA National Agricultural Statistics Service, crop progress reports and Quick Stats</dd></div>
+      <div><dt>County boundaries</dt><dd>U.S. Census Bureau cartographic boundary files</dd></div>
     </dl>
+    <p class="fine">Forward Grade is not affiliated with or endorsed by USDA, NOAA or the Census Bureau. These are historical backtests on public data: hypothetical, not forecasts for any facility or season, not a guarantee of future results, and not financial, trading, insurance or agronomic advice. See the <a href="terms.html">terms of use</a>.</p>
   </div>
 </section>
 
@@ -291,8 +304,8 @@
 
 <footer>
   <div class="wrap">
-    <span>Forward Grade LLC. Sioux Falls, South Dakota. Founded 2026.</span>
-    <a href="https://www.linkedin.com/company/forwardgrade">LinkedIn</a>
+    <span>&copy; 2026 Forward Grade LLC. Sioux Falls, South Dakota.</span>
+    <nav aria-label="Legal"><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="https://www.linkedin.com/company/forwardgrade">LinkedIn</a></nav>
   </div>
 </footer>
 

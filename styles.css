@@ -226,6 +226,19 @@ thead th { border-bottom: 1px solid var(--rule); color: var(--ink-soft); font-we
 .limits dt { font-weight: 700; font-stretch: 112%; }
 .limits dd { margin: 0; color: var(--ink-soft); }
 
+.doc h1 { font-size: clamp(2rem, 4vw, 3rem); }
+.doc h2 { font-size: 1.25rem; margin-top: 2.5rem; max-width: none; }
+.doc p, .doc ul { margin-top: 0.75rem; max-width: var(--measure); color: var(--ink-soft); }
+.doc ul { padding-left: 1.25rem; }
+.doc li + li { margin-top: 0.5rem; }
+.doc b { color: var(--ink); }
+footer nav { display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; }
+.sources { margin: 2rem 0 0; max-width: 56rem; }
+.sources div { display: grid; grid-template-columns: 16rem 1fr; gap: 0.25rem 2.5rem; padding: 0.9rem 0; border-top: 1px solid var(--rule); }
+.sources dt { font-weight: 600; }
+.sources dd { margin: 0; color: var(--ink-soft); }
+.fine { margin-top: 2rem; font-size: 0.9rem; color: var(--ink-soft); }
+
 footer { padding-block: 2.5rem; font-size: 0.875rem; color: var(--ink-faint); }
 footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; }
 
@@ -248,7 +261,7 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
   .season { grid-template-columns: 1fr; border-top: 0; border-left: 2px solid var(--ink); padding-left: 1.25rem; gap: 1.5rem; }
   .season li, .season .spring, .season .summer, .season .fall { grid-column: 1; padding: 0; }
   .season .summer { background: none; }
-  .contact .wrap, .pilot, .limits div { grid-template-columns: 1fr; }
+  .contact .wrap, .pilot, .limits div, .sources div { grid-template-columns: 1fr; }
   .bars { height: 9rem; }
   .bars li span { font-size: 0.75rem; }
 }

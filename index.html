@@ -7,10 +7,17 @@
 <meta name="description" content="Forward Grade is building harvest quality forecasts (DON, aflatoxin, test weight, falling number) for US elevators, co-ops and distilleries whose contracts are priced on them, starting in the Ohio Valley and the Mid-South.">
 <meta property="og:title" content="Forward Grade">
 <meta property="og:description" content="Forward Grade is building harvest quality forecasts for US grain buyers: DON, aflatoxin, test weight and falling number. A first public test on national mycotoxin insurance records is published.">
+<meta property="og:image" content="https://forwardgrade.com/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The Forward Grade logo beside a map of the lower 48 states with the tested counties shaded green, over a pale aerial view of farm fields.">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#265448">
 <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="styles.css">
+<style>@media (prefers-reduced-motion: no-preference) { @view-transition { navigation: auto; } }</style>
+<noscript><style>.strip { display: none; } .strip + .season { margin-top: 3.5rem; }</style></noscript>
 </head>
 <body>
 
@@ -55,6 +62,12 @@
   <div class="wrap">
     <h2>Contracts are priced months before the grain can be tested.</h2>
     <p class="lede">The weather that decides quality happens in a narrow window long before harvest. The tests happen at the pit, after the discount schedule is set.</p>
+    <picture class="strip" data-defer>
+      <source media="(prefers-color-scheme: dark)" type="image/avif" sizes="(min-width: 1312px) 1216px, 94vw" data-srcset="img/bg/season-dark-1280.avif 1280w, img/bg/season-dark-1920.avif 1920w">
+      <source media="(prefers-color-scheme: dark)" type="image/webp" sizes="(min-width: 1312px) 1216px, 94vw" data-srcset="img/bg/season-dark-1280.webp 1280w, img/bg/season-dark-1920.webp 1920w">
+      <source type="image/avif" sizes="(min-width: 1312px) 1216px, 94vw" data-srcset="img/bg/season-light-1280.avif 1280w, img/bg/season-light-1920.avif 1920w">
+      <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="" width="1280" height="256" loading="lazy" decoding="async" sizes="(min-width: 1312px) 1216px, 94vw" data-srcset="img/bg/season-light-1280.webp 1280w, img/bg/season-light-1920.webp 1920w">
+    </picture>
     <ol class="season">
       <li class="spring"><b>Contracts written</b>Priced against a quality spec nobody can verify yet.</li>
       <li class="summer"><b>Weather sets the risk</b>Flowering and grain fill. A forecast belongs here, while there is still time to act on it.</li>
@@ -68,21 +81,45 @@
     <h2>Four numbers decide what a load is worth.</h2>
     <dl class="measures">
       <div>
+        <picture class="bg">
+          <source media="(prefers-color-scheme: dark)" type="image/avif" sizes="(min-width: 1312px) 540px, (min-width: 901px) 42vw, 92vw" srcset="img/bg/measure-don-dark-800.avif 800w, img/bg/measure-don-dark-1200.avif 1200w">
+          <source media="(prefers-color-scheme: dark)" type="image/webp" sizes="(min-width: 1312px) 540px, (min-width: 901px) 42vw, 92vw" srcset="img/bg/measure-don-dark-800.webp 800w, img/bg/measure-don-dark-1200.webp 1200w">
+          <source type="image/avif" sizes="(min-width: 1312px) 540px, (min-width: 901px) 42vw, 92vw" srcset="img/bg/measure-don-light-800.avif 800w, img/bg/measure-don-light-1200.avif 1200w">
+          <img src="img/bg/measure-don-light-800.webp" alt="" width="800" height="339" loading="lazy" decoding="async" sizes="(min-width: 1312px) 540px, (min-width: 901px) 42vw, 92vw" srcset="img/bg/measure-don-light-800.webp 800w, img/bg/measure-don-light-1200.webp 1200w">
+        </picture>
         <dt>DON <small>vomitoxin</small></dt>
         <dd>Fusarium infection in wheat, favored by wet, humid weather around flowering.</dd>
         <dd>Drives discount schedules and rejections at the pit.</dd>
       </div>
       <div>
+        <picture class="bg">
+          <source media="(prefers-color-scheme: dark)" type="image/avif" sizes="(min-width: 1312px) 540px, (min-width: 901px) 42vw, 92vw" srcset="img/bg/measure-aflatoxin-dark-800.avif 800w, img/bg/measure-aflatoxin-dark-1200.avif 1200w">
+          <source media="(prefers-color-scheme: dark)" type="image/webp" sizes="(min-width: 1312px) 540px, (min-width: 901px) 42vw, 92vw" srcset="img/bg/measure-aflatoxin-dark-800.webp 800w, img/bg/measure-aflatoxin-dark-1200.webp 1200w">
+          <source type="image/avif" sizes="(min-width: 1312px) 540px, (min-width: 901px) 42vw, 92vw" srcset="img/bg/measure-aflatoxin-light-800.avif 800w, img/bg/measure-aflatoxin-light-1200.avif 1200w">
+          <img src="img/bg/measure-aflatoxin-light-800.webp" alt="" width="800" height="339" loading="lazy" decoding="async" sizes="(min-width: 1312px) 540px, (min-width: 901px) 42vw, 92vw" srcset="img/bg/measure-aflatoxin-light-800.webp 800w, img/bg/measure-aflatoxin-light-1200.webp 1200w">
+        </picture>
         <dt>Aflatoxin</dt>
         <dd>Heat and drought stress while the kernel fills.</dd>
         <dd>A contaminated lot can be discounted or rejected outright.</dd>
       </div>
       <div>
+        <picture class="bg">
+          <source media="(prefers-color-scheme: dark)" type="image/avif" sizes="(min-width: 1312px) 540px, (min-width: 901px) 42vw, 92vw" srcset="img/bg/measure-testweight-dark-800.avif 800w, img/bg/measure-testweight-dark-1200.avif 1200w">
+          <source media="(prefers-color-scheme: dark)" type="image/webp" sizes="(min-width: 1312px) 540px, (min-width: 901px) 42vw, 92vw" srcset="img/bg/measure-testweight-dark-800.webp 800w, img/bg/measure-testweight-dark-1200.webp 1200w">
+          <source type="image/avif" sizes="(min-width: 1312px) 540px, (min-width: 901px) 42vw, 92vw" srcset="img/bg/measure-testweight-light-800.avif 800w, img/bg/measure-testweight-light-1200.avif 1200w">
+          <img src="img/bg/measure-testweight-light-800.webp" alt="" width="800" height="339" loading="lazy" decoding="async" sizes="(min-width: 1312px) 540px, (min-width: 901px) 42vw, 92vw" srcset="img/bg/measure-testweight-light-800.webp 800w, img/bg/measure-testweight-light-1200.webp 1200w">
+        </picture>
         <dt>Test weight</dt>
         <dd>Bushel density, and a grade factor on every load.</dd>
         <dd>Buyers dock loads that come in light.</dd>
       </div>
       <div>
+        <picture class="bg">
+          <source media="(prefers-color-scheme: dark)" type="image/avif" sizes="(min-width: 1312px) 540px, (min-width: 901px) 42vw, 92vw" srcset="img/bg/measure-fallingnumber-dark-800.avif 800w, img/bg/measure-fallingnumber-dark-1200.avif 1200w">
+          <source media="(prefers-color-scheme: dark)" type="image/webp" sizes="(min-width: 1312px) 540px, (min-width: 901px) 42vw, 92vw" srcset="img/bg/measure-fallingnumber-dark-800.webp 800w, img/bg/measure-fallingnumber-dark-1200.webp 1200w">
+          <source type="image/avif" sizes="(min-width: 1312px) 540px, (min-width: 901px) 42vw, 92vw" srcset="img/bg/measure-fallingnumber-light-800.avif 800w, img/bg/measure-fallingnumber-light-1200.avif 1200w">
+          <img src="img/bg/measure-fallingnumber-light-800.webp" alt="" width="800" height="339" loading="lazy" decoding="async" sizes="(min-width: 1312px) 540px, (min-width: 901px) 42vw, 92vw" srcset="img/bg/measure-fallingnumber-light-800.webp 800w, img/bg/measure-fallingnumber-light-1200.webp 1200w">
+        </picture>
         <dt>Falling number</dt>
         <dd>A wheat quality measure that sets milling value.</dd>
         <dd>Flour millers blend and price against it.</dd>
@@ -115,10 +152,22 @@
     <p class="lede">Grain buyers across the US, starting in the Ohio Valley and the Mid-South.</p>
     <div class="buyers">
       <article>
+        <picture>
+          <source media="(prefers-color-scheme: dark)" type="image/avif" sizes="(min-width: 1312px) 540px, (min-width: 901px) 42vw, 92vw" srcset="img/bg/buyer-elevator-dark-800.avif 800w, img/bg/buyer-elevator-dark-1200.avif 1200w">
+          <source media="(prefers-color-scheme: dark)" type="image/webp" sizes="(min-width: 1312px) 540px, (min-width: 901px) 42vw, 92vw" srcset="img/bg/buyer-elevator-dark-800.webp 800w, img/bg/buyer-elevator-dark-1200.webp 1200w">
+          <source type="image/avif" sizes="(min-width: 1312px) 540px, (min-width: 901px) 42vw, 92vw" srcset="img/bg/buyer-elevator-light-800.avif 800w, img/bg/buyer-elevator-light-1200.avif 1200w">
+          <img src="img/bg/buyer-elevator-light-800.webp" alt="" width="800" height="537" loading="lazy" decoding="async" sizes="(min-width: 1312px) 540px, (min-width: 901px) 42vw, 92vw" srcset="img/bg/buyer-elevator-light-800.webp 800w, img/bg/buyer-elevator-light-1200.webp 1200w">
+        </picture>
         <h3>Country elevators and co-ops</h3>
         <p>Blending strategy, discount schedules and bin space, set across hundreds of deliveries before the first truck arrives.</p>
       </article>
       <article>
+        <picture>
+          <source media="(prefers-color-scheme: dark)" type="image/avif" sizes="(min-width: 1312px) 540px, (min-width: 901px) 42vw, 92vw" srcset="img/bg/buyer-distillery-dark-800.avif 800w, img/bg/buyer-distillery-dark-1200.avif 1200w">
+          <source media="(prefers-color-scheme: dark)" type="image/webp" sizes="(min-width: 1312px) 540px, (min-width: 901px) 42vw, 92vw" srcset="img/bg/buyer-distillery-dark-800.webp 800w, img/bg/buyer-distillery-dark-1200.webp 1200w">
+          <source type="image/avif" sizes="(min-width: 1312px) 540px, (min-width: 901px) 42vw, 92vw" srcset="img/bg/buyer-distillery-light-800.avif 800w, img/bg/buyer-distillery-light-1200.avif 1200w">
+          <img src="img/bg/buyer-distillery-light-800.webp" alt="" width="800" height="537" loading="lazy" decoding="async" sizes="(min-width: 1312px) 540px, (min-width: 901px) 42vw, 92vw" srcset="img/bg/buyer-distillery-light-800.webp 800w, img/bg/buyer-distillery-light-1200.webp 1200w">
+        </picture>
         <h3>Distilleries</h3>
         <p>Corn bought on mycotoxin spec. Toxins concentrate in the stillage and distillers grains sold on as feed, so one bad purchase hurts two revenue streams.</p>
       </article>
@@ -127,6 +176,12 @@
 </section>
 
 <section class="contact" id="contact">
+  <picture class="bg">
+    <source media="(prefers-color-scheme: dark)" type="image/avif" sizes="100vw" srcset="img/bg/contact-dark-1280.avif 1280w, img/bg/contact-dark-1920.avif 1920w, img/bg/contact-dark-2560.avif 2560w">
+    <source media="(prefers-color-scheme: dark)" type="image/webp" sizes="100vw" srcset="img/bg/contact-dark-1280.webp 1280w, img/bg/contact-dark-1920.webp 1920w, img/bg/contact-dark-2560.webp 2560w">
+    <source type="image/avif" sizes="100vw" srcset="img/bg/contact-light-1280.avif 1280w, img/bg/contact-light-1920.avif 1920w, img/bg/contact-light-2560.avif 2560w">
+    <img src="img/bg/contact-light-1920.webp" alt="" width="1920" height="815" loading="lazy" decoding="async" sizes="100vw" srcset="img/bg/contact-light-1280.webp 1280w, img/bg/contact-light-1920.webp 1920w, img/bg/contact-light-2560.webp 2560w">
+  </picture>
   <div class="wrap">
     <div>
       <h2>Buying grain against a quality spec? Let's talk.</h2>
@@ -137,22 +192,22 @@
       <input type="hidden" name="_subject" value="Forward Grade pilot request">
       <div class="field">
         <label for="f-name">Name</label>
-        <input id="f-name" name="name" autocomplete="name" required maxlength="120">
+        <input id="f-name" name="name" autocomplete="name" required maxlength="120" aria-describedby="e-name">
         <p class="err" id="e-name"></p>
       </div>
       <div class="field">
         <label for="f-email">Work email</label>
-        <input id="f-email" name="email" type="email" autocomplete="email" required maxlength="254">
+        <input id="f-email" name="email" type="email" autocomplete="email" required maxlength="254" aria-describedby="e-email">
         <p class="err" id="e-email"></p>
       </div>
       <div class="field">
         <label for="f-organization">Facility or company</label>
-        <input id="f-organization" name="organization" autocomplete="organization" required maxlength="160">
+        <input id="f-organization" name="organization" autocomplete="organization" required maxlength="160" aria-describedby="e-organization">
         <p class="err" id="e-organization"></p>
       </div>
       <div class="field">
         <label for="f-segment">You buy grain as a</label>
-        <select id="f-segment" name="segment" required>
+        <select id="f-segment" name="segment" required aria-describedby="e-segment">
           <option value="">Choose one</option>
           <option>Country elevator or co-op</option>
           <option>Distillery</option>
@@ -178,6 +233,16 @@
   </div>
 </section>
 <script>
+// The season photo sits within the browser's own lazy-load distance of the first screen, so the browser would
+// fetch it with the page. Its files wait in data-srcset until it is 200px from the viewport (no JS: no photo).
+for (const pic of document.querySelectorAll("picture[data-defer]")) {
+  new IntersectionObserver(([entry], io) => {
+    if (!entry.isIntersecting) return;
+    pic.querySelectorAll("[data-srcset]").forEach((el) => (el.srcset = el.dataset.srcset));
+    io.disconnect();
+  }, { rootMargin: "200px" }).observe(pic);
+}
+
 // Progressive enhancement: without JS the form still posts to Formspree, which shows its own thank-you page.
 const form = document.querySelector(".pilot"), status = form.querySelector(".status"), button = form.querySelector("button");
 const messages = {
@@ -186,12 +251,27 @@ const messages = {
   organization: "Enter the facility or company you buy for.",
   segment: "Choose the kind of buyer you are.",
 };
+// Feedback text arrives with the site's enter timing (motion tokens in styles.css); none under reduced motion.
+// The final state is the element's own style, so an interrupted or skipped animation still leaves the text visible.
+const motionOK = matchMedia("(prefers-reduced-motion: no-preference)");
+const token = (name) => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+function appear(el, i = 0) {
+  if (!motionOK.matches) return;
+  el.animate({ opacity: [0, 1], transform: ["translateY(0.25rem)", "none"] }, {
+    duration: parseFloat(token("--dur-enter")), delay: i * parseFloat(token("--stagger")), easing: token("--ease-out"), fill: "backwards" });
+}
+function say(msg) {
+  status.textContent = msg;
+  appear(status);
+}
 function showErrors(errors) {
-  for (const [k, msg] of Object.entries(errors)) {
-    document.getElementById("e-" + k).textContent = msg;
+  Object.entries(errors).forEach(([k, msg], i) => {
+    const err = document.getElementById("e-" + k);
+    err.textContent = msg;
     document.getElementById("f-" + k).setAttribute("aria-invalid", "true");
-  }
-  status.textContent = "Check the highlighted fields.";
+    appear(err, i);
+  });
+  say("Check the highlighted fields.");
   form.querySelector("[aria-invalid]").focus();
 }
 form.addEventListener("submit", async (e) => {
@@ -203,20 +283,20 @@ form.addEventListener("submit", async (e) => {
   for (const k in messages) if (!form.elements[k].checkValidity() || !form.elements[k].value.trim()) errors[k] = messages[k];
   if (Object.keys(errors).length) return showErrors(errors);
   button.disabled = true;
-  status.textContent = "Sending your request...";
+  say("Sending your request...");
   try {
     const res = await fetch(form.action, { method: "POST", body: new FormData(form), headers: { Accept: "application/json" } });
     if (res.ok) {
       form.reset();
-      status.textContent = "Request sent. We'll reply by email.";
+      say("Request sent. We'll reply by email.");
     } else {
       const body = await res.json().catch(() => ({}));
       const fieldErrors = Object.fromEntries((body.errors || []).filter((x) => messages[x.field]).map((x) => [x.field, messages[x.field]]));
       if (Object.keys(fieldErrors).length) showErrors(fieldErrors);
-      else status.textContent = "Couldn't send right now. Try again, or email adrian@forwardgrade.com.";
+      else say("Couldn't send right now. Try again, or email adrian@forwardgrade.com.");
     }
   } catch {
-    status.textContent = "Couldn't send. Check your connection and try again, or email adrian@forwardgrade.com.";
+    say("Couldn't send. Check your connection and try again, or email adrian@forwardgrade.com.");
   }
   button.disabled = false;
 });

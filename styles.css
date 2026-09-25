@@ -28,10 +28,21 @@
   --on-band: #f3f5f2;
   --band-button: #f3f5f2;
   --band-button-text: #265448;
-  --band-err: #f2c48d;
+  --band-err: #f5d0a4;
+  --measure-veil: 80%;    /* paper laid over the measures photos, so their text keeps 4.5:1 in both themes */
+  --band-veil: 91%;       /* band colour laid over the pilot band's photo, enough for 4.5:1 under all its text */
   --measure: 36rem;
   --wide: 76rem;
   --gutter: clamp(1rem, 4vw, 3rem);
+  /* Motion, shared by every animation and transition. Ease-out curves with no overshoot; the Motion kit's
+     spring generator is a Motion+ tool, so no linear() springs. Exits run at about 65% of entries. */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in: cubic-bezier(0.64, 0, 0.78, 0);
+  --dur-quick: 150ms;     /* hover, press, chart tooltips */
+  --dur-enter: 280ms;     /* form feedback, page fade in */
+  --dur-exit: 180ms;      /* page fade out */
+  --dur-reveal: 800ms;    /* hero map */
+  --stagger: 40ms;        /* between form errors */
   color-scheme: light dark;
 }
 
@@ -57,6 +68,7 @@
     --on-band: #e3e9e5;
     --band-button: #e8d3ae;
     --band-button-text: #0f1412;
+    --band-veil: 82%;
   }
 }
 
@@ -83,7 +95,7 @@ section + section { border-top: 1px solid var(--rule); }
 .lede { color: var(--ink-soft); font-size: 1.125rem; margin-top: 1.25rem; }
 
 /* Header */
-.top { position: sticky; top: 0; z-index: 10; background: color-mix(in srgb, var(--paper) 92%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--rule); }
+.top { position: sticky; top: 0; z-index: 10; background: color-mix(in srgb, var(--paper) 92%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--rule); view-transition-name: top; }
 .top .wrap { display: flex; align-items: center; gap: 2rem; height: 4.25rem; }
 .lockup { display: flex; align-items: center; gap: 0.7rem; text-decoration: none; margin-right: auto; }
 .lockup svg { width: 2.1rem; height: 2.1rem; fill: var(--brand); }
@@ -99,7 +111,7 @@ section + section { border-top: 1px solid var(--rule); }
   display: inline-flex; align-items: center; min-height: 2.75rem; padding: 0 1.25rem;
   background: var(--brand); color: var(--on-brand); border-radius: 999px;
   font-weight: 600; text-decoration: none; white-space: nowrap;
-  transition: transform 0.15s, background-color 0.15s;
+  transition: transform var(--dur-quick) var(--ease-out), background-color var(--dur-quick) var(--ease-out);
 }
 .button:hover { background: color-mix(in srgb, var(--brand) 86%, var(--ink)); }
 .button:active { transform: translateY(1px); }
@@ -119,17 +131,24 @@ section + section { border-top: 1px solid var(--rule); }
 figure { margin: 0; }
 figcaption { margin-top: 0.9rem; font-size: 0.875rem; color: var(--ink-faint); max-width: 34rem; }
 
-/* The gap: a real timeline */
-.season { list-style: none; padding: 0; margin: 3.5rem 0 0; display: grid; grid-template-columns: repeat(8, 1fr); border-top: 2px solid var(--ink); }
+/* The gap: a real timeline, standing under a photo of one field through the same seasons */
+.strip { display: block; margin-top: 3rem; }
+.strip img { display: block; width: 100%; height: auto; aspect-ratio: 5 / 1; object-fit: cover; }   /* 5:1 even before its deferred files load */
+.season { list-style: none; padding: 2px 0 0; margin: 3.5rem 0 0; display: grid; grid-template-columns: repeat(8, 1fr); position: relative; }
+.strip + .season { margin-top: 1rem; }   /* paper under the photo, so the ink rule never lands on dark soil */
+.season::before { content: ""; position: absolute; inset: 0 0 auto; border-top: 2px solid var(--ink); transform-origin: left; }
 .season li { padding-top: 1rem; font-size: 0.95rem; color: var(--ink-soft); }
 .season li b { display: block; color: var(--ink); font-stretch: 112%; margin-bottom: 0.35rem; }
 .season .spring { grid-column: 1 / 3; }
-.season .summer { grid-column: 4 / 7; background: color-mix(in srgb, var(--win) 10%, transparent); padding-inline: 0.75rem; }
+.season .summer { grid-column: 4 / 7; padding-inline: 0.75rem; position: relative; isolation: isolate; }
+.season .summer::before { content: ""; position: absolute; inset: 0; z-index: -1; background: color-mix(in srgb, var(--win) 10%, transparent); }
 .season .fall { grid-column: 8 / 9; }
 
 /* Four measures */
 .measures { display: grid; grid-template-columns: repeat(2, 1fr); gap: 3rem clamp(2rem, 6vw, 6rem); margin-top: 3.5rem; }
-.measures div { border-top: 1px solid var(--rule); padding-top: 1.25rem; }
+.measures div { border-top: 1px solid var(--rule); padding: 1.25rem 1.5rem 1.5rem; position: relative; isolation: isolate; }
+.measures div::after { content: ""; position: absolute; inset: 0; z-index: -1; background: color-mix(in srgb, var(--paper) var(--measure-veil), transparent); }
+.measures .bg img { object-position: right center; }
 .measures dt { font-size: clamp(1.6rem, 3vw, 2.25rem); font-weight: 600; font-stretch: 125%; line-height: 1.1; }
 .measures dt small { font-size: 0.5em; font-weight: 400; font-stretch: 100%; color: var(--ink-faint); margin-left: 0.4em; }
 .measures dd { margin: 0.75rem 0 0; color: var(--ink-soft); max-width: 30rem; }
@@ -161,9 +180,10 @@ figcaption { margin-top: 0.9rem; font-size: 0.875rem; color: var(--ink-faint); m
 .bars li::after {
   content: attr(data-v); position: absolute; left: 50%; bottom: calc(50% + var(--h) * 0.78% + 0.4rem); translate: -50% 0;
   background: var(--ink); color: var(--paper); font-size: 0.75rem; font-weight: 600; padding: 0.15rem 0.45rem; border-radius: 4px;
-  white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity 0.12s; z-index: 1;
+  white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity var(--dur-quick) var(--ease-out); z-index: 1;
 }
 .bars .down::after { bottom: auto; top: calc(50% + var(--h) * 0.78% + 0.4rem); }
+.bars li:nth-last-child(-n+2)::after { left: auto; right: 0; translate: none; }   /* last tooltips stay inside a 390px screen */
 .bars li:hover::after { opacity: 1; }
 .crop figcaption { margin-top: 2.25rem; }
 .withdrawn .bars .up::before { background: color-mix(in srgb, var(--win) 45%, var(--paper)); box-shadow: inset 0 0 0 1.5px var(--win); }
@@ -181,12 +201,18 @@ thead th { border-bottom: 1px solid var(--rule); color: var(--ink-soft); font-we
 
 /* Who it is for */
 .buyers { display: grid; grid-template-columns: 1.1fr 1fr; gap: clamp(2rem, 6vw, 6rem); margin-top: 3.5rem; }
+.buyers img { display: block; width: 100%; height: min(24vw, 22rem); object-fit: cover; margin-bottom: 1.5rem; }   /* one height for both columns, so the headings line up */
 .buyers h3 { font-size: clamp(1.5rem, 2.6vw, 2rem); }
 .buyers p { margin-top: 0.9rem; color: var(--ink-soft); }
 .buyers article:first-child { padding-right: clamp(0rem, 3vw, 3rem); border-right: 1px solid var(--rule); }
 
-/* Contact */
-.contact { background: var(--band); color: var(--on-band); border: 0; }
+/* Photos behind a section's content (Website/HANDOFF.md 6): decorative, never animated */
+.bg { position: absolute; inset: 0; z-index: -1; }
+.bg img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+/* Contact: the band colour shows until the photo arrives, then veils it */
+.contact { background: var(--band); color: var(--on-band); border: 0; position: relative; isolation: isolate; }
+.contact::after { content: ""; position: absolute; inset: 0; z-index: -1; background: color-mix(in srgb, var(--band) var(--band-veil), transparent); }
 .contact .wrap { display: grid; grid-template-columns: 1fr 1.15fr; align-items: start; gap: 2.5rem clamp(2rem, 6vw, 6rem); }
 .contact h2 { max-width: 18ch; }
 .contact .wrap > div > p { margin-top: 1.25rem; opacity: 0.85; }
@@ -219,8 +245,18 @@ thead th { border-bottom: 1px solid var(--rule); color: var(--ink-soft); font-we
 .pilot .privacy a { color: var(--on-band); }
 .hp { position: absolute; left: -9999px; }
 
+.page-intro { position: relative; isolation: isolate; overflow: hidden; }
 .page-intro h1 { font-size: clamp(2.25rem, 4.4vw, 3.6rem); max-width: 18ch; }
 .page-intro .lede { max-width: 40rem; }
+/* Method intro photo: its hazy left 36% must sit under the text, so on wide screens it is drawn wider than
+   the page, anchored left; narrower screens show it as a strip under the text instead. */
+.page-intro .bg img { object-position: left center; }
+@media (min-width: 1200px) { .page-intro .bg { right: auto; width: max(100%, calc((50vw + 2rem) / 0.36), calc(43rem / 0.36)); } }
+@media (max-width: 1199px) {
+  .page-intro { padding-bottom: 0; }
+  .page-intro .bg { position: static; aspect-ratio: 3 / 1; margin-top: 2.5rem; }
+  .page-intro .bg img { object-position: 80% center; }
+}
 .limits { display: grid; gap: 0; margin: 2.5rem 0 0; max-width: 56rem; }
 .limits div { display: grid; grid-template-columns: 16rem 1fr; gap: 0.5rem 2.5rem; padding: 1.25rem 0; border-top: 1px solid var(--rule); }
 .limits dt { font-weight: 700; font-stretch: 112%; }
@@ -242,15 +278,44 @@ footer nav { display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; }
 footer { padding-block: 2.5rem; font-size: 0.875rem; color: var(--ink-faint); }
 footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; }
 
-/* One orchestrated moment: the bars grow as the record scrolls into view. */
+/* Motion (Website/HANDOFF.md section 3), only for visitors who have not asked for reduced motion. The rules
+   above are the final states, so reduced motion and browsers without scroll timelines get the finished page.
+   Nothing moves layout: transform and opacity, plus two clip reveals (the map, the chart lines) that draw
+   in place. */
 @media (prefers-reduced-motion: no-preference) {
+  /* Page to page, index and method only (each opts in with @view-transition in its head); the header holds still. */
+  ::view-transition-old(root) { animation-duration: var(--dur-exit); animation-timing-function: var(--ease-in); }
+  ::view-transition-new(root) { animation-duration: var(--dur-enter); animation-timing-function: var(--ease-out); }
+
+  /* Hero: the map opens from its most-tested counties outward (52% 40% is the area-weighted centre of the
+     darkest band in img/us-tested.svg). */
+  .hero-map img { animation: core-out var(--dur-reveal) var(--ease-out) backwards; }
+
   @supports (animation-timeline: view()) {
+    /* The record: bars grow as each chart scrolls into view. */
     .bars li::before { animation: grow linear both; animation-timeline: view(); animation-range: entry 10% cover 40%; }
     .bars .up::before { transform-origin: bottom; }
     .bars .down::before { transform-origin: top; }
+
+    /* The gap: the season rule draws from contracts to grading; the weather window lights as the rule crosses it. */
+    .season { view-timeline-name: --season; }
+    .season::before { animation: draw-x linear both; animation-timeline: --season; animation-range: entry 30% cover 42%; }
+    .season .summer::before { animation: fade-in linear both; animation-timeline: --season; animation-range: cover 20% cover 32%; }
+    @media (max-width: 900px) { .season::before { animation-name: draw-y; } }
+
+    /* Bad-year charts: county history draws first, then the weather model, left to right like the years. */
+    .lc-plot { view-timeline-name: --plot; }
+    .lc-hist, .lc-model { animation: wipe linear backwards; animation-timeline: --plot; }
+    .lc-hist { animation-range: entry 80% cover 28%; }
+    .lc-model { animation-range: cover 28% cover 40%; }
   }
 }
 @keyframes grow { from { transform: scaleY(0); } }
+@keyframes draw-x { from { transform: scaleX(0); } }
+@keyframes draw-y { from { transform: scaleY(0); } }
+@keyframes fade-in { from { opacity: 0; } }
+@keyframes wipe { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0); } }
+@keyframes core-out { from { clip-path: circle(0% at 52% 40%); } to { clip-path: circle(80% at 52% 40%); } }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 
 @media (max-width: 900px) {
@@ -258,9 +323,16 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
   .hero .wrap, .charts, .buyers, .status, .measures { grid-template-columns: 1fr; }
   .hero .wrap { min-height: 0; }
   .buyers article:first-child { border-right: 0; padding-right: 0; }
-  .season { grid-template-columns: 1fr; border-top: 0; border-left: 2px solid var(--ink); padding-left: 1.25rem; gap: 1.5rem; }
+  .buyers img { height: auto; }
+  .measures div { padding: 1.25rem 0 0; }
+  .measures div::after { content: none; }
+  .measures .bg { position: static; aspect-ratio: 3 / 1; margin-bottom: 1.25rem; }
+  .strip { display: none; }
+  .strip + .season { margin-top: 3.5rem; }
+  .season { grid-template-columns: 1fr; padding: 0 0 0 calc(1.25rem + 2px); gap: 1.5rem; }
+  .season::before { inset: 0 auto 0 0; border-top: 0; border-left: 2px solid var(--ink); transform-origin: top; }
   .season li, .season .spring, .season .summer, .season .fall { grid-column: 1; padding: 0; }
-  .season .summer { background: none; }
+  .season .summer::before { content: none; }
   .contact .wrap, .pilot, .limits div, .sources div { grid-template-columns: 1fr; }
   .bars { height: 9rem; }
   .bars li span { font-size: 0.75rem; }

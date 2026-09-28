@@ -300,6 +300,12 @@ function showErrors(errors) {
   say("Check the highlighted fields.");
   form.querySelector("[aria-invalid]").focus();
 }
+// At most 5 sends per 15 minutes from this browser. This stops repeat clicks, not bots: they post to Formspree
+// directly, where the _gotcha honeypot and Formspree's spam filter catch them. Times stay on the device (privacy.html).
+const LIMIT = 5, WINDOW = 15 * 60 * 1000;
+function recentSends(now) {
+  try { return JSON.parse(localStorage.getItem("fg-sends") || "[]").filter((t) => now - t < WINDOW); } catch { return []; }
+}
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
   form.querySelectorAll(".err").forEach((p) => (p.textContent = ""));
@@ -308,6 +314,12 @@ form.addEventListener("submit", async (e) => {
   const errors = {};
   for (const k in messages) if (!form.elements[k].checkValidity() || !form.elements[k].value.trim()) errors[k] = messages[k];
   if (Object.keys(errors).length) return showErrors(errors);
+  const now = Date.now(), sends = recentSends(now);
+  if (sends.length >= LIMIT) {
+    const wait = Math.ceil((sends[0] + WINDOW - now) / 60000);
+    return say(`You've sent ${LIMIT} requests in the last 15 minutes. Try again in ${wait} minute${wait === 1 ? "" : "s"}, or email adrian@forwardgrade.com.`);
+  }
+  try { localStorage.setItem("fg-sends", JSON.stringify([...sends, now])); } catch {}
   button.disabled = true;
   say("Sending your request...");
   try {

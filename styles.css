@@ -207,7 +207,7 @@ thead th { border-bottom: 1px solid var(--rule); color: var(--ink-soft); font-we
 .buyers article:first-child { padding-right: clamp(0rem, 3vw, 3rem); border-right: 1px solid var(--rule); }
 
 /* Photos behind a section's content (Website/HANDOFF.md 6): decorative, never animated */
-.bg { position: absolute; inset: 0; z-index: -1; }
+.bg { display: block; position: absolute; inset: 0; z-index: -1; }   /* block, so a narrow screen's in-flow photo keeps its aspect-ratio box */
 .bg img { display: block; width: 100%; height: 100%; object-fit: cover; }
 
 /* Contact: the band colour shows until the photo arrives, then veils it */
@@ -274,6 +274,9 @@ footer nav { display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; }
 .sources dt { font-weight: 600; }
 .sources dd { margin: 0; color: var(--ink-soft); }
 .fine { margin-top: 2rem; font-size: 0.9rem; color: var(--ink-soft); }
+.fineprint { padding-block: clamp(2.5rem, 5vw, 3.5rem) 0.5rem; border-top: 0; }
+.fineprint h2 { font-size: 1.25rem; max-width: none; }   /* landing page: small print under the form, not a headline */
+.fineprint .sources { margin-top: 1.25rem; }
 
 footer { padding-block: 2.5rem; font-size: 0.875rem; color: var(--ink-faint); }
 footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; }

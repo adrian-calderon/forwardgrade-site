@@ -15,7 +15,7 @@
 <meta name="theme-color" content="#265448">
 <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="styles.css?v=3">
 <style>@media (prefers-reduced-motion: no-preference) { @view-transition { navigation: auto; } }</style>
 <noscript><style>.strip { display: none; } .strip + .season { margin-top: 3.5rem; }</style></noscript>
 </head>
@@ -32,7 +32,7 @@
       <a href="method.html">How we test</a>
       <a href="#buyers">Who it's for</a>
     </nav>
-    <a class="button" href="#contact">Request a pilot</a>
+    <a class="button" href="#contact">Request information</a>
   </div>
 </header>
 
@@ -44,7 +44,7 @@
       <h1>Know the grade before the trucks do.</h1>
       <p class="lede">Harvest quality forecasts for US grain buyers, in development: DON, aflatoxin, test weight and falling number, facility by facility.</p>
       <div class="actions">
-        <a class="button" href="#contact">Request a pilot</a>
+        <a class="button" href="#contact">Request information</a>
         <a class="quiet" href="method.html">How we test</a>
       </div>
     </div>
@@ -189,7 +189,7 @@
       <p class="sign">Adrián Calderón Villegas, Founder</p>
     </div>
     <form class="pilot" action="https://formspree.io/f/xoevwzev" method="post" novalidate>
-      <input type="hidden" name="_subject" value="Forward Grade pilot request">
+      <input type="hidden" name="_subject" value="Forward Grade information request">
       <div class="field">
         <label for="f-name">Name</label>
         <input id="f-name" name="name" autocomplete="name" required maxlength="120" aria-describedby="e-name">
@@ -200,7 +200,7 @@
         <input id="f-email" name="email" type="email" autocomplete="email" required maxlength="254" aria-describedby="e-email">
         <p class="err" id="e-email"></p>
       </div>
-      <div class="field">
+      <div class="field wide">
         <label for="f-organization">Facility or company</label>
         <input id="f-organization" name="organization" autocomplete="organization" required maxlength="160" aria-describedby="e-organization">
         <p class="err" id="e-organization"></p>
@@ -218,6 +218,17 @@
         </select>
         <p class="err" id="e-segment"></p>
       </div>
+      <div class="field">
+        <label for="f-commodity">Grain you buy</label>
+        <select id="f-commodity" name="commodity" required aria-describedby="e-commodity">
+          <option value="">Choose one</option>
+          <option>Corn</option>
+          <option>Wheat</option>
+          <option>Corn and wheat</option>
+          <option>Other grain</option>
+        </select>
+        <p class="err" id="e-commodity"></p>
+      </div>
       <div class="field wide">
         <label for="f-message">What would you want forecast? <span>Optional</span></label>
         <textarea id="f-message" name="message" rows="3" maxlength="2000"></textarea>
@@ -225,11 +236,24 @@
       </div>
       <div class="hp" aria-hidden="true"><label for="f-gotcha">Leave this empty</label><input id="f-gotcha" name="_gotcha" tabindex="-1" autocomplete="off"></div>
       <div class="wide submit">
-        <button class="button" type="submit">Request a pilot</button>
+        <button class="button" type="submit">Request information</button>
         <p class="status" role="status"></p>
       </div>
       <p class="wide privacy">We use this only to reply to you. See our <a href="privacy.html">privacy policy</a>. Prefer email? <a href="mailto:adrian@forwardgrade.com">adrian@forwardgrade.com</a></p>
     </form>
+  </div>
+</section>
+
+<section class="fineprint" id="sources">
+  <div class="wrap">
+    <h2>Sources and disclaimer</h2>
+    <dl class="sources">
+      <div><dt>Mycotoxin claims</dt><dd>USDA Risk Management Agency, cause of loss data by county</dd></div>
+      <div><dt>Weather</dt><dd>NOAA NCEI nClimGrid daily county data</dd></div>
+      <div><dt>Flowering dates and crop yield</dt><dd>USDA National Agricultural Statistics Service, crop progress reports and Quick Stats</dd></div>
+      <div><dt>County boundaries</dt><dd>U.S. Census Bureau cartographic boundary files</dd></div>
+    </dl>
+    <p class="fine">Forward Grade is not affiliated with or endorsed by USDA, NOAA or the Census Bureau. The map at the top of this page shows where the method was tested on historical public data. It is not a forecast for any facility or season, not a guarantee of future results, and not financial, trading, insurance or agronomic advice. See <a href="method.html">how we test</a> and the <a href="terms.html">terms of use</a>.</p>
   </div>
 </section>
 <script>
@@ -250,6 +274,7 @@ const messages = {
   email: "Enter an email address like name@company.com.",
   organization: "Enter the facility or company you buy for.",
   segment: "Choose the kind of buyer you are.",
+  commodity: "Choose the grain you buy.",
 };
 // Feedback text arrives with the site's enter timing (motion tokens in styles.css); none under reduced motion.
 // The final state is the element's own style, so an interrupted or skipped animation still leaves the text visible.

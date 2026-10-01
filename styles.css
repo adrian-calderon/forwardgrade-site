@@ -375,11 +375,12 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
 @container scroll-state(scrollable: right) { .q-table::after { opacity: 1; } }
 .q-table tbody { white-space: nowrap; }   /* one line per year, "All years" included */
 .q-table :is(th, td):last-child { padding-right: 0; }   /* no scrollable padding past the last column */
+@media (max-width: 400px) { .q-table :is(th, td) { padding-right: 1rem; } }   /* the yield table then fits a 320 px screen (296 px in 288) */
 .lc h3 { margin-bottom: 0.5rem; }
 .lc-legend { list-style: none; display: flex; flex-wrap: wrap; gap: 0.35rem 1.1rem; margin: 0 0 0.9rem; padding: 0; font-size: 0.8125rem; color: var(--ink-soft); }
 .lc-legend li::before { content: ""; display: inline-block; width: 0.9rem; margin-right: 0.4rem; vertical-align: middle; }
 .lc-legend .k-actual::before { height: 0.7rem; background: var(--ink-faint); opacity: 0.8; border-radius: 2px 2px 0 0; }
-@media (forced-colors: active) { .lc-legend .k-actual::before { forced-color-adjust: none; background: CanvasText; opacity: 1; } }
+@media (forced-colors: active) { .lc-legend .k-actual::before, .lc-bar { forced-color-adjust: none; } .lc-legend .k-actual::before { background: CanvasText; } .lc-bar { fill: CanvasText; } }   /* bars and swatch keep matching system colours */
 .lc-legend .k-model::before { border-top: 2px solid var(--win); }
 .lc-legend .k-hist::before { border-top: 2px dashed var(--ink); }
 .lc-plot { position: relative; height: 10rem; margin: 0 0.75rem 2.6rem 2.2rem; }   /* right margin: room for the last year label */

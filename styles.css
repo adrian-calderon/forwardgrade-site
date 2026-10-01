@@ -168,7 +168,7 @@ figcaption { margin-top: 0.9rem; font-size: 0.875rem; color: var(--ink-faint); m
 .not-quality { margin-top: 3.5rem; font-weight: 600; color: var(--caveat-text); }
 .charts { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 5vw, 4rem); margin-top: 1.25rem; }
 .withdrawn { border-left: 3px solid var(--caveat); padding-left: clamp(1rem, 2vw, 1.75rem); }
-.crop h3 { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem 0.75rem; font-size: 1.125rem; margin-bottom: 1.25rem; }
+.crop h3 { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem 0.75rem; font-size: 1.125rem; margin-bottom: 1.75rem; }   /* room for the value readout */
 
 .bars { list-style: none; margin: 0; padding: 0; height: 10rem; background: linear-gradient(var(--rule), var(--rule)) 0 30.5% / 100% 1px no-repeat, linear-gradient(var(--rule), var(--rule)) 0 69.5% / 100% 1px no-repeat; display: grid; grid-template-columns: repeat(13, 1fr); gap: 2px; position: relative; }
 .bars::before { content: ""; position: absolute; inset: 50% 0 auto; border-top: 1px solid var(--ink-faint); }
@@ -177,14 +177,23 @@ figcaption { margin-top: 0.9rem; font-size: 0.875rem; color: var(--ink-faint); m
 .bars .up::before { bottom: 50%; background: var(--win); border-radius: 4px 4px 0 0; }
 .bars .down::before { top: 50%; background: var(--caveat); border-radius: 0 0 4px 4px; }
 .bars li span { position: absolute; bottom: -1.4rem; left: 0; right: 0; text-align: center; font-size: 0.75rem; color: var(--ink-faint); font-variant-numeric: tabular-nums; }
+/* Value readout: sits on the plot's top edge, above its bar, so it covers no bar and the pointer can rest on it
+   (WCAG 1.4.13). The first and last two align to the plot's edges. */
 .bars li::after {
-  content: attr(data-v); position: absolute; left: 50%; bottom: calc(50% + var(--h) * 0.78% + 0.4rem); translate: -50% 0;
-  background: var(--ink); color: var(--paper); font-size: 0.75rem; font-weight: 600; padding: 0.15rem 0.45rem; border-radius: 4px;
+  content: attr(data-v); position: absolute; left: 50%; bottom: 100%; translate: -50% 0;
+  background: var(--ink); color: var(--paper); font-size: 0.75rem; font-weight: 600; line-height: 1.4; padding: 0.15rem 0.45rem; border-radius: 4px;
   white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity var(--dur-quick) var(--ease-out); z-index: 1;
 }
-.bars .down::after { bottom: auto; top: calc(50% + var(--h) * 0.78% + 0.4rem); }
-.bars li:nth-last-child(-n+2)::after { left: auto; right: 0; translate: none; }   /* last tooltips stay inside a 390px screen */
-.bars li:hover::after { opacity: 1; }
+.bars li:nth-child(-n+2 of [data-v])::after { left: 0; translate: none; }
+.bars li:nth-last-child(-n+2)::after { left: auto; right: 0; translate: none; }
+.bars li[data-v]:hover { background: color-mix(in srgb, var(--ink) 6%, transparent); border-radius: 4px; }   /* ties the readout to its column */
+.bars li:hover::after { opacity: 1; pointer-events: auto; }
+/* Forced colors: bars in CanvasText; the withdrawn chart keeps its carried bars solid and outlines the rest.
+   !important beats the withdrawn fills' higher specificity. */
+@media (forced-colors: active) {
+  .bars li::before { forced-color-adjust: none; background: CanvasText !important; box-shadow: none !important; }
+  .withdrawn .bars li:not(.carried)::before { background: Canvas !important; box-shadow: inset 0 0 0 1.5px CanvasText !important; }
+}
 .crop figcaption { margin-top: 2.25rem; }
 .withdrawn .bars .up::before { background: color-mix(in srgb, var(--win) 45%, var(--paper)); box-shadow: inset 0 0 0 1.5px var(--win); }
 .withdrawn .bars .down::before { background: color-mix(in srgb, var(--caveat) 45%, var(--paper)); box-shadow: inset 0 0 0 1.5px var(--caveat); }
@@ -341,7 +350,7 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
   .bars li span { font-size: 0.75rem; }
 }
 @media (max-width: 560px) { .bars .carried-note { display: none; } }
-@media (max-width: 480px) { .top .wrap { gap: 1rem; } .top .button { padding: 0 0.9rem; font-size: 0.875rem; } }
+@media (max-width: 480px) { .top .wrap { gap: 1rem; } .top .button { padding: 0 0.9rem; font-size: 0.875rem; white-space: normal; line-height: 1.15; text-align: center; } }   /* wraps to two lines only where one does not fit */
 
 /* Quality backtest section (backtest/web/quality.css). Site tokens only. */
 .bars.y21 { grid-template-columns: repeat(21, 1fr); gap: 1px; }
@@ -354,14 +363,24 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
 .q-map img { display: block; width: 100%; height: auto; }
 .q-map figcaption, .q-note { margin-top: 0.75rem; font-size: 0.875rem; color: var(--ink-soft); max-width: var(--measure); }
 .q-note { margin-top: 2.5rem; }
-.q-table { overflow-x: auto; }
+/* Edge shadows mark columns scrolled out of view: sticky overlays that a scroll-state query shows only toward hidden
+   columns, so scrolling repaints nothing; browsers without scroll-state queries show the table without them. */
+.q-table { overflow-x: auto; display: grid; container-type: scroll-state; }
+.q-table > table, .q-table::before, .q-table::after { grid-area: 1 / 1; }
+.q-table::before, .q-table::after { content: ""; position: sticky; width: 0.75rem; opacity: 0; pointer-events: none; }
+.q-table::before { left: 0; justify-self: start; background: radial-gradient(farthest-side at 0 50%, color-mix(in srgb, var(--ink) 40%, transparent), transparent); }
+.q-table::after { right: 0; justify-self: end; background: radial-gradient(farthest-side at 100% 50%, color-mix(in srgb, var(--ink) 40%, transparent), transparent); }
+@container scroll-state(scrollable: left) { .q-table::before { opacity: 1; } }
+@container scroll-state(scrollable: right) { .q-table::after { opacity: 1; } }
+.q-table tbody { white-space: nowrap; }   /* one line per year, "All years" included */
+.q-table :is(th, td):last-child { padding-right: 0; }   /* no scrollable padding past the last column */
 .lc h3 { margin-bottom: 0.5rem; }
 .lc-legend { list-style: none; display: flex; flex-wrap: wrap; gap: 0.35rem 1.1rem; margin: 0 0 0.9rem; padding: 0; font-size: 0.8125rem; color: var(--ink-soft); }
 .lc-legend li::before { content: ""; display: inline-block; width: 0.9rem; margin-right: 0.4rem; vertical-align: middle; }
 .lc-legend .k-actual::before { height: 0.7rem; background: var(--ink-faint); opacity: 0.6; border-radius: 2px 2px 0 0; }
 .lc-legend .k-model::before { border-top: 2px solid var(--win); }
 .lc-legend .k-hist::before { border-top: 2px dashed var(--ink); }
-.lc-plot { position: relative; height: 10rem; margin: 0 0 2.6rem 2.2rem; }
+.lc-plot { position: relative; height: 10rem; margin: 0 0.75rem 2.6rem 2.2rem; }   /* right margin: room for the last year label */
 .lc-plot svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
 .lc-y { position: absolute; left: -2.2rem; right: 0; bottom: calc(var(--v) * 1%); font-size: 0.75rem; line-height: 0; color: var(--ink-faint); font-variant-numeric: tabular-nums; border-bottom: 1px solid var(--rule); }
 .lc-bar { fill: var(--ink-faint); opacity: 0.6; }

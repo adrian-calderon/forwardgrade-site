@@ -367,6 +367,7 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
    columns, so scrolling repaints nothing; browsers without scroll-state queries show the table without them. */
 .q-table { overflow-x: auto; display: grid; container-type: scroll-state; }
 .q-table > table, .q-table::before, .q-table::after { grid-area: 1 / 1; }
+.q-table > table { justify-self: start; }
 .q-table::before, .q-table::after { content: ""; position: sticky; width: 0.75rem; opacity: 0; pointer-events: none; }
 .q-table::before { left: 0; justify-self: start; background: radial-gradient(farthest-side at 0 50%, color-mix(in srgb, var(--ink) 40%, transparent), transparent); }
 .q-table::after { right: 0; justify-self: end; background: radial-gradient(farthest-side at 100% 50%, color-mix(in srgb, var(--ink) 40%, transparent), transparent); }
